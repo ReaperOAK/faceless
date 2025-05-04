@@ -6,9 +6,88 @@ The user wants an MVP that auto-creates content for Instagram and posts it. I'll
 
 To schedule posts for Instagram Business profiles, you could use official methods like the Graph API (requires approval and a token). For a DIY approach, you could consider tools such as Selenium, InstaPy, or Instabot, though they carry a risk of account violation. For a simple solution, using a Python-based app with Django or Flask could be effective. I'll look up more details by searching for terms like "Instagram Graph API Python post image" and see what comes up.
 
+# Instagram Automation MVP - Project Todo List
+
+## Phase 1: Setup & Research (Week 1)
+- [ ] Convert personal Instagram account to Business/Creator account
+- [ ] Create a Facebook Page and link it to Instagram account
+- [ ] Register as a Facebook Developer and create an app
+- [ ] Apply for necessary permissions (`instagram_content_publish`, `instagram_graph_api`)
+- [ ] Research content generation options:
+  - [ ] Evaluate free-tier AI services (OpenAI API, Hugging Face)
+  - [ ] Research self-hosted options (GPT-Neo, BLOOM)
+  - [ ] Compare Azure AI services (Azure OpenAI Service, Language Service)
+- [ ] Set up local development environment:
+  - [ ] Create Python virtual environment
+  - [ ] Install Flask framework and dependencies
+
+## Phase 2: Core Infrastructure (Week 2)
+- [ ] Set up Flask application skeleton
+- [ ] Implement authentication with Facebook Graph API
+  - [ ] Generate and store long-lived access token
+  - [ ] Set up token refresh mechanism
+- [ ] Create image hosting solution:
+  - [ ] Implement Ngrok option for local development
+  - [ ] Research Azure Blob Storage for production (with proper security)
+- [ ] Design database schema for content tracking
+  - [ ] Track posted content, scheduling, and performance
+
+## Phase 3: Content Generation Module (Week 3)
+- [ ] Implement AI caption generation:
+  - [ ] Define prompts for different content types
+  - [ ] Build integration with selected AI service
+  - [ ] Add error handling and rate limiting
+- [ ] Develop image generation/manipulation:
+  - [ ] Set up Pillow for basic image operations
+  - [ ] Create templates for different post types
+  - [ ] Implement text overlay capabilities
+
+## Phase 4: Instagram Publishing (Week 4)
+- [ ] Implement the two-step publishing process:
+  - [ ] Create media container endpoint
+  - [ ] Publish media endpoint
+- [ ] Add scheduling capabilities:
+  - [ ] Create a job queue system
+  - [ ] Implement time-based publishing
+- [ ] Set up monitoring and logging
+  - [ ] Track successful/failed posts
+  - [ ] Monitor API rate limits
+
+## Phase 5: Testing & MVP Release (Week 5)
+- [ ] Write unit tests for core functionalities
+- [ ] Perform end-to-end testing
+- [ ] Document setup process and API usage
+- [ ] Create simple admin interface for content approval
+- [ ] Release MVP for initial user feedback
+
+## Phase 6: Refinement & Optimization (Week 6)
+- [ ] Implement user feedback
+- [ ] Optimize AI prompt engineering for better content
+- [ ] Add analytics dashboard
+- [ ] Explore content recycling strategies
+- [ ] Implement A/B testing for different content types
+
+## Resources & References
+- [Instagram Graph API Documentation](https://developers.facebook.com/docs/instagram-api/)
+- [Facebook for Developers - Content Publishing](https://developers.facebook.com/docs/instagram-api/guides/content-publishing)
+- [Azure AI Services Documentation](https://learn.microsoft.com/en-us/azure/ai-services/)
+- [Flask Documentation](https://flask.palletsprojects.com/)
+- [Pillow Documentation](https://pillow.readthedocs.io/)
+
+## Security & Best Practices
+- Never hardcode API keys or tokens in the codebase
+- Implement secure credential storage (use Azure Key Vault)
+- Follow rate limiting guidelines for both Instagram API and AI services
+- Ensure proper error handling and logging
+- Implement exponential backoff for API retries
+- Use managed identities for Azure resources when applicable
+
+## Next Steps
+- [ ] Decide on hosting platform (Azure App Service, Container Apps)
+- [ ] Create CI/CD pipeline for automated deployment
+- [ ] Set up monitoring and alerting
 
 Thought for 6 seconds
-
 
 Below is an end‑to‑end MVP workflow and architecture for a simple Python‑based application that (1) generates Instagram content automatically and (2) publishes it via the official Instagram Graph API. You’ll use only free‑forever or open‑source components—no paid services required.
 

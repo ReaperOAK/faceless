@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            padding-top: 20px;
+        }
+        .post-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        .post-card {
+            margin-bottom: 20px;
+        }
+        .sidebar {
+            position: sticky;
+            top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="pb-3 mb-4 border-bottom">
+            <div class="d-flex flex-wrap justify-content-between align-items-center">
+                <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+                    <span class="fs-4">Instagram Automation Dashboard</span>
+                </a>
+                <div>
+                    <button class="btn btn-outline-primary me-2">Settings</button>
+                    <a href="/" class="btn btn-outline-secondary">Home</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="sidebar p-3 bg-light rounded">
+                    <h5>Quick Actions</h5>
+                    <hr>
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active" id="generate-content-btn">
+                                <i class="bi bi-magic"></i> Generate New Content
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-dark" id="schedule-post-btn">
+                                <i class="bi bi-calendar-check"></i> Schedule Post
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-dark" id="view-analytics-btn">
+                                <i class="bi bi-graph-up"></i> View Analytics
+                            </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <h5>Post Status</h5>
+                    <div class="mt-2">
+                        <div class="d-flex justify-content-between">
+                            <span>Published</span>
+                            <span class="badge bg-success">0</span>
+                        </div>
+                        <div class="d-flex justify-content-between mt-2">
+                            <span>Scheduled</span>
+                            <span class="badge bg-warning">0</span>
+                        </div>
+                        <div class="d-flex justify-content-between mt-2">
+                            <span>Failed</span>
+                            <span class="badge bg-danger">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <div class="col-md-9">
+                <!-- Alert for notifications -->
+                <div class="alert alert-info" role="alert">
+                    <i class="bi bi-info-circle"></i> Your next post is scheduled to be published automatically in 24 hours.
+                </div>
+
+                <!-- Content generation card -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5>Generate New Content</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="generate-content-form">
+                            <div class="mb-3">
+                                <label for="content-type" class="form-label">Content Type</label>
+                                <select class="form-select" id="content-type">
+                                    <option value="caption">Caption</option>
+                                    <option value="hashtags">Hashtags</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="template-select" class="form-label">Template</label>
+                                <select class="form-select" id="template-select">
+                                    <option value="">-- Select Template --</option>
+                                    <option value="1">Motivational Quote</option>
+                                    <option value="2">Business Tip</option>
+                                    <option value="3">Daily Inspiration</option>
+                                </select>
+                            </div>
+                            <button type="button" class="btn btn-primary" id="generate-btn">Generate</button>
+                        </form>
+                        <div class="mt-3" id="generated-content-box" style="display: none;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2 text-muted">Generated Content</h6>
+                                    <p class="card-text" id="generated-content"></p>
+                                    <button class="btn btn-sm btn-outline-primary">Use This</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Regenerate</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Posts -->
+                <h5 class="mb-3">Recent Posts</h5>
+                <div id="posts-container">
+                    <!-- Posts will be loaded here dynamically -->
+                    <div class="card post-card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="https://placekitten.com/300/300" alt="Post Image" class="post-image">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="card-title">Example Post</h5>
+                                        <span class="badge bg-success">Published</span>
+                                    </div>
+                                    <p class="card-text">This is a placeholder for post content. Real content will be loaded dynamically.</p>
+                                    <small class="text-muted">Posted on May 1, 2025</small>
+                                    <div class="mt-2">
+                                        <button class="btn btn-sm btn-outline-primary">View on Instagram</button>
+                                        <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="pt-3 mt-4 text-muted border-top">
+            &copy; 2025 Instagram Automation MVP
+        </footer>
+    </div>
+
+    <!-- Modal for Post Creation -->
+    <div class="modal fade" id="schedulePostModal" tabindex="-1" aria-labelledby="schedulePostModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="schedulePostModalLabel">Schedule New Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="schedule-post-form">
+                        <div class="mb-3">
+                            <label for="post-caption" class="form-label">Caption</label>
+                            <textarea class="form-control" id="post-caption" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="post-image" class="form-label">Upload Image</label>
+                            <input class="form-control" type="file" id="post-image">
+                        </div>
+                        <div class="mb-3">
+                            <label for="post-date" class="form-label">Schedule Date</label>
+                            <input type="datetime-local" class="form-control" id="post-date">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="save-schedule-btn">Schedule Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize modals
+            const schedulePostModal = new bootstrap.Modal(document.getElementById('schedulePostModal'));
+            
+            // Button event listeners
+            document.getElementById('schedule-post-btn').addEventListener('click', function() {
+                schedulePostModal.show();
+            });
+            
+            document.getElementById('generate-btn').addEventListener('click', function() {
+                // Simulate API call for content generation
+                setTimeout(function() {
+                    document.getElementById('generated-content').textContent = "Success is not final, failure is not fatal: it is the courage to continue that counts. Keep pushing forward! #motivation #success #nevergiveup";
+                    document.getElementById('generated-content-box').style.display = 'block';
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
